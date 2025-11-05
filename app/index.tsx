@@ -1,7 +1,6 @@
 import Builds from '@/components/Builds';
 import { Colors } from '@/constants/Colors';
 import { db } from '@/lib/db';
-import { id } from '@instantdb/react-native';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
@@ -15,7 +14,6 @@ export default function Index() {
   const handleGenerate = async () => {
     const appPrompt = prompt;
     setPrompt('');
-    const buildId = id();
 
     const response = await fetch('/api/generate', {
       method: 'POST',
@@ -23,7 +21,7 @@ export default function Index() {
         'Content-Type': 'application/json',
         RefreshToken: `${user.refresh_token}`,
       },
-      body: JSON.stringify({ prompt: appPrompt, buildId }),
+      body: JSON.stringify({ prompt: appPrompt }),
     });
     if (!response.ok) {
       console.error('Failed to get response from LLM');
@@ -32,7 +30,7 @@ export default function Index() {
     const data = await response.json();
     console.log(data);
     // setBuildId(data.buildId);
-    router.push(`/build/${buildId}`);
+    router.push(`/build/${data.buildId}`);
   };
 
   return (

@@ -1,3 +1,4 @@
+import EvalComp from '@/components/EvalComp';
 import { Colors } from '@/constants/Colors';
 import { db } from '@/lib/db';
 import { Stack, useLocalSearchParams } from 'expo-router';
@@ -18,7 +19,6 @@ const Page = () => {
   if (error) {
     return <Text>Error: {error.message}</Text>;
   }
-  console.log('🚀 ~ Page ~ data:', data);
 
   if (!data || !data.builds[0]) {
     return <Text>Build not found</Text>;
@@ -52,7 +52,7 @@ const Page = () => {
           <Text style={styles.code}>{data?.builds[0].code}</Text>
         </ScrollView>
       )}
-      {selectedView === 'preview' && <Text>Preview</Text>}
+      {selectedView === 'preview' && <EvalComp id={id} />}
     </View>
   );
 };

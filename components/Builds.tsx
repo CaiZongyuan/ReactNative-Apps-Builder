@@ -60,6 +60,7 @@ const Builds = () => {
         data={data.$users[0].builds}
         renderItem={renderListItem}
         ListEmptyComponent={<Text>No builds found</Text>}
+        contentContainerStyle={{ gap: 10 }}
       />
     </View>
   );
