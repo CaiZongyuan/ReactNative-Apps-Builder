@@ -1,8 +1,12 @@
+import { Colors } from '@/constants/Colors';
 import { db } from '@/lib/db';
-import { useLocalSearchParams } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
+import { Stack, useLocalSearchParams } from 'expo-router';
+import { useState } from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 const Page = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
+  const [selectedView, setSelectedView] = useState<'code' | 'preview'>('code');
+
   const { isLoading, error, data } = db.useQuery({
     builds: {
       $: { where: { id } },
@@ -22,10 +26,33 @@ const Page = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Build {id}</Text>
-      <Text>Instant App ID: {data?.builds[0].instantAppId}</Text>
-      <Text>Is Previewable: {data?.builds[0].isPreviewable ? 'Yes' : 'No'}</Text>
-      <Text>{data?.builds[0].code}</Text>
+      <Stack.Screen options={{ title: data?.builds[0].title || 'Build' }} />
+      <View style={styles.tabs}>
+        <TouchableOpacity style={styles.tab} onPress={() => setSelectedView('code')}>
+          <Text
+            style={[
+              styles.tabText,
+              { color: selectedView === 'code' ? Colors.primary : Colors.gray },
+            ]}>
+            Code
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tab} onPress={() => setSelectedView('preview')}>
+          <Text
+            style={[
+              styles.tabText,
+              { color: selectedView === 'preview' ? Colors.primary : Colors.gray },
+            ]}>
+            Preview
+          </Text>
+        </TouchableOpacity>
+      </View>
+      {selectedView === 'code' && (
+        <ScrollView style={styles.code}>
+          <Text style={styles.code}>{data?.builds[0].code}</Text>
+        </ScrollView>
+      )}
+      {selectedView === 'preview' && <Text>Preview</Text>}
     </View>
   );
 };
@@ -33,5 +60,28 @@ export default Page;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  tabs: {
+    flexDirection: 'row',
+    gap: 10,
+    margin: 10,
+  },
+  tab: {
+    flex: 1,
+    padding: 10,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: Colors.gray,
+    backgroundColor: '#fff',
+  },
+  tabText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: Colors.primary,
+  },
+  code: {
+    fontSize: 14,
+    fontFamily: 'monospace',
+    padding: 10,
   },
 });

@@ -1,7 +1,12 @@
 import { Colors } from '@/constants/Colors';
+import { AppSchema } from '@/instant.schema';
 import { db } from '@/lib/db';
+import { Ionicons } from '@expo/vector-icons';
+import { InstaQLEntity } from '@instantdb/react-native';
 import { Link } from 'expo-router';
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+type Build = InstaQLEntity<AppSchema, 'builds', {}>;
 
 const Builds = () => {
   const user = db.useUser();
@@ -32,11 +37,17 @@ const Builds = () => {
     return <Text>No builds found</Text>;
   }
 
-  const renderListItem = ({ item }: { item: any }) => {
+  const renderListItem = ({ item }: { item: Build }) => {
     return (
       <Link href={`/build/${item.id}`} asChild>
-        <TouchableOpacity>
-          <Text>{item.id}</Text>
+        <TouchableOpacity style={styles.buildItem}>
+          <View>
+            <Text style={styles.buildItemTitle}>{item.title}</Text>
+            <Text style={styles.buildItemStatus}>
+              {item.isPreviewable ? 'Previewable' : 'Not Previewable'}
+            </Text>
+          </View>
+          <Ionicons name="chevron-forward" size={20} color={Colors.gray} />
         </TouchableOpacity>
       </Link>
     );
@@ -57,11 +68,32 @@ export default Builds;
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    flex: 1,
   },
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: Colors.gray,
+  },
+  buildItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 10,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: Colors.gray,
+    backgroundColor: '#fff',
+    gap: 10,
+  },
+  buildItemTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: Colors.primary,
+  },
+  buildItemStatus: {
+    fontSize: 12,
     color: Colors.gray,
   },
 });

@@ -23,6 +23,7 @@ const _schema = i.schema({
       slug: i.string().indexed().unique().optional(),
       error: i.json<BuildError>().optional(),
       isPreviewable: i.boolean().optional(),
+      title: i.string().optional(),
     }),
   },
   links: {
