@@ -6,25 +6,23 @@ import { InstaQLEntity } from '@instantdb/react-native';
 import { Link } from 'expo-router';
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-type Build = InstaQLEntity<AppSchema, 'builds', {}>;
+type Build = Pick<InstaQLEntity<AppSchema, 'builds', {}>, 'id' | 'title' | 'isPreviewable'>;
 
 const Builds = () => {
   const user = db.useUser();
   const { isLoading, error, data } = db.useQuery(
-    user
-      ? {
-          $users: {
-            $: {
-              where: {
-                id: user.id,
-              },
-            },
-            builds: {},
+    {
+      builds: {
+        $: {
+          fields: ['id', 'title', 'isPreviewable'],
+          where: {
+            owner: user.id,
           },
-        }
-      : null
-  );
-  console.log('🚀 ~ Builds ~ data:', data);
+        },
+      },
+    });
+  
+    console.log('🚀 ~ Builds ~ data:', data);
 
   if (isLoading) {
     return <Text>Loading...</Text>;
@@ -32,8 +30,8 @@ const Builds = () => {
   if (error) {
     return <Text>Error: {error.message}</Text>;
   }
-
-  if (!data || !data.$users[0] || !data.$users[0].builds) {
+  const builds = data.builds
+  if (!builds.length) {
     return <Text>No builds found</Text>;
   }
 
@@ -57,7 +55,7 @@ const Builds = () => {
     <View style={styles.container}>
       <Text style={styles.sectionTitle}>Previous Builds</Text>
       <FlatList
-        data={data.$users[0].builds}
+        data={builds}
         renderItem={renderListItem}
         ListEmptyComponent={<Text>No builds found</Text>}
         contentContainerStyle={{ gap: 10 }}

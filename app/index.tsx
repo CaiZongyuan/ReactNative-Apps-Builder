@@ -8,7 +8,6 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 export default function Index() {
   const [prompt, setPrompt] = useState('Build a Tic Tac Toe game');
   const user = db.useUser();
-  const [buildId, setBuildId] = useState<string | null>(null);
   const router = useRouter();
 
   const handleGenerate = async () => {
@@ -28,8 +27,7 @@ export default function Index() {
     }
 
     const data = await response.json();
-    console.log(data);
-    // setBuildId(data.buildId);
+    console.log('Data ->', data);
     router.push(`/build/${data.buildId}`);
   };
 
@@ -38,25 +36,20 @@ export default function Index() {
       style={{
         flex: 1,
       }}>
-      {buildId ? (
-        <Text>Build ID: {buildId}</Text>
-      ) : (
-        <View style={styles.container}>
-          <TextInput
-            style={styles.input}
-            multiline={true}
-            numberOfLines={5}
-            textAlignVertical="top"
-            placeholder="Build a workout tracker..."
-            value={prompt}
-            onChangeText={setPrompt}
-          />
-          <TouchableOpacity style={styles.button} onPress={handleGenerate}>
-            <Text style={styles.buttonText}>Generate Mini App</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-
+      <View style={styles.container}>
+        <TextInput
+          style={styles.input}
+          multiline={true}
+          numberOfLines={5}
+          textAlignVertical="top"
+          placeholder="Build a workout tracker..."
+          value={prompt}
+          onChangeText={setPrompt}
+        />
+        <TouchableOpacity style={styles.button} onPress={handleGenerate}>
+          <Text style={styles.buttonText}>Generate Mini App</Text>
+        </TouchableOpacity>
+      </View>
       <Builds />
     </View>
   );
