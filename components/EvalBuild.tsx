@@ -5,9 +5,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 type ParseResult = { element: React.ReactElement } | { error: string };
 
-function parseResult(code: string): ParseResult { 
+function parseResult(instantAppId: string, code: string): ParseResult { 
   try { 
-     const element = codeStrToReactElement(code);
+     const element = codeStrToReactElement(instantAppId, code);
      return { element: element }
   } catch (e: any) { 
     console.error('Uh oh', e);
@@ -15,8 +15,8 @@ function parseResult(code: string): ParseResult {
   }
 }
 
-export default function EvalBuild({ code }: { code: string }) {  
-  const parsed = useMemo(() => parseResult(code), [code]);
+export default function EvalBuild({ code, instantAppId }: { instantAppId: string; code: string, }) {  
+  const parsed = useMemo(() => parseResult(instantAppId, code), [instantAppId, code]);
   if ('error' in parsed) { 
     return (
       <View>
