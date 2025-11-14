@@ -23,7 +23,7 @@ const Page = () => {
   if (!build) {
     return <Text>Build not found</Text>;
   }
-
+  
   return (
     <View style={styles.container}>
       <Stack.Screen options={{ title: data?.builds[0].title || 'Build' }} />
@@ -51,6 +51,7 @@ const Page = () => {
       </View>
       {selectedView === 'code' && (
         <ScrollView style={styles.code}>
+          <Text style={styles.code}>{build.reasoning}</Text>
           <Text style={styles.code}>{build.code || 'Generating...'}</Text>
         </ScrollView>
       )}
