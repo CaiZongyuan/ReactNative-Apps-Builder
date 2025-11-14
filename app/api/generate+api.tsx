@@ -87,7 +87,8 @@ async function callOpenAI(
     system: getSystemPrompt(),
     providerOptions: {
       openai: {
-        reasoningSummary: 'detailed'
+        reasoningSummary: 'detailed',
+        reasoningEffort: 'low',
       }
     }
   });
