@@ -88,6 +88,7 @@ async function callOpenAI(
     providerOptions: {
       openai: {
         reasoningSummary: 'detailed',
+        reasoningEffort: 'low',
       }
     }
   });
