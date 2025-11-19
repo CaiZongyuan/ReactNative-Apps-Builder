@@ -54,7 +54,7 @@ const Page = () => {
           <Text style={styles.code}>{build.code || 'Generating...'}</Text>
         </ScrollView>
       )}
-      {selectedView === 'preview' && <EvalBuild code={build.code} />}
+      {selectedView === 'preview' && <EvalBuild instantAppId={build.instantAppId} code={build.code} />}
     </View>
   );
 };

@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     const buildId = id();
 
     console.log('🚀 ~ POST ~ friendlyTitle:', friendlyTitle);
-    const build = await createBuild(user, { buildId, friendlyTitle });
+    await createBuild(user, { buildId, friendlyTitle });
     console.log('Build created');
 
     // Trigger OpenAI to generate the code
@@ -35,8 +35,8 @@ export async function POST(req: Request) {
 
     // THIS ACTUALLY GENERATES THE CODE
     generateText({
-      model: openai('gpt-4o'),
-      prompt: `${prompt.initialPrompt} When adding the InstandDB connection, use the following Instant App ID: ${build.instantAppId}`,
+      model: openai('gpt-5-codex'),
+      prompt: prompt,
       system: getSystemPrompt(),
       onStepFinish: async (step) => {
         console.log('🚀 ~ POST ~ step:', step.text);
@@ -45,9 +45,6 @@ export async function POST(req: Request) {
           .transact([adminDB.tx.builds[buildId].update({ code: step.text, isPreviewable: true })]);
       },
     });
-    // console.log('after generate text');
-    // const text = result.text;
-    // console.log('🚀 ~ POST ~ text:', text);
 
     return Response.json({ buildId });
   } catch (error: any) {
