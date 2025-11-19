@@ -10,19 +10,18 @@ type Build = Pick<InstaQLEntity<AppSchema, 'builds', {}>, 'id' | 'title' | 'isPr
 
 const Builds = () => {
   const user = db.useUser();
-  const { isLoading, error, data } = db.useQuery(
-    {
-      builds: {
-        $: {
-          fields: ['id', 'title', 'isPreviewable'],
-          where: {
-            owner: user.id,
-          },
+  const { isLoading, error, data } = db.useQuery({
+    builds: {
+      $: {
+        fields: ['id', 'title', 'isPreviewable'],
+        where: {
+          owner: user.id,
         },
       },
-    });
-  
-    console.log('🚀 ~ Builds ~ data:', data);
+    },
+  });
+
+  console.log('🚀 ~ Builds ~ data:', data);
 
   if (isLoading) {
     return <Text>Loading...</Text>;
@@ -30,10 +29,7 @@ const Builds = () => {
   if (error) {
     return <Text>Error: {error.message}</Text>;
   }
-  const builds = data.builds
-  if (!builds.length) {
-    return <Text>No builds found</Text>;
-  }
+  const builds = data.builds;
 
   const renderListItem = ({ item }: { item: Build }) => {
     return (
@@ -57,8 +53,8 @@ const Builds = () => {
       <FlatList
         data={builds}
         renderItem={renderListItem}
-        ListEmptyComponent={<Text>No builds found</Text>}
-        contentContainerStyle={{ gap: 10 }}
+        ListEmptyComponent={<Text style={styles.emptyText}>No builds found</Text>}
+        contentContainerStyle={{ gap: 10, flex: 1 }}
       />
     </View>
   );
@@ -93,6 +89,10 @@ const styles = StyleSheet.create({
   },
   buildItemStatus: {
     fontSize: 12,
+    color: Colors.gray,
+  },
+  emptyText: {
+    fontSize: 16,
     color: Colors.gray,
   },
 });
