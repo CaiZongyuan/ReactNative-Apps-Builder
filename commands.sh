@@ -1,7 +1,6 @@
 bunx create-expo mini-apps
 
 bunx instant-cli login
-
 bunx instant-cli@latest init
 
 bunx instant-cli pull

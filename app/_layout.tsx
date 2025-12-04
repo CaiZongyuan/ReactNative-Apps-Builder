@@ -6,7 +6,6 @@ import { Text, TouchableOpacity, View } from 'react-native';
 
 export default function RootLayout() {
   const { isLoading, user, error } = db.useAuth();
-  console.log('🚀 ~ RootLayout ~ user:', user);
 
   if (isLoading) {
     return (

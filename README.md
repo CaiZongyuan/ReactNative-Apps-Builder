@@ -1,50 +1,88 @@
-# Welcome to your Expo app 👋
+# Build your own App Builder with React Native and InstantDB
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+An AI-powered app builder that generates React Native applications using natural language prompts. Built with React Native, Expo, InstantDB, and OpenAI, showcasing modern mobile development practices.
 
-## Get started
+## Features
 
-1. Install dependencies
+- 🤖 **AI-Powered Generation**: Generate React Native apps from natural language prompts using OpenAI
+- 📱 **Native Mobile Apps**: Build real React Native applications that run on iOS and Android
+- 🔄 **Real-time Updates**: InstantDB provides real-time synchronization of builds and data
+- 👤 **User Authentication**: Secure user authentication and build ownership
+- 📝 **Build Management**: Create, view, and manage multiple app builds
+- 🎨 **Live Preview**: Preview generated apps before deployment
+- 🚀 **Expo Router**: File-based routing with protected routes
 
-   ```bash
-   npm install
-   ```
+## Video Tutorial
 
-2. Start the app
+Watch and build this App Builder step by step:
 
-   ```bash
-   npx expo start
-   ```
+<p align="center">
+  <a href="https://youtu.be/HRACNTmikZI" target="_blank">
+    <img src="https://img.youtube.com/vi/HRACNTmikZI/maxresdefault.jpg" alt="Build your own App Builder with React Native and InstantDB" width="100%" />
+  </a>
+</p>
 
-In the output, you'll find options to open the app in a
+## Getting Started
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### Prerequisites
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- [Bun](https://bun.sh/) (recommended) or Node.js
+- [Expo CLI](https://docs.expo.dev/get-started/set-up-your-environment/)
+- InstantDB account and app credentials
+- OpenAI API key
 
-## Get a fresh project
+For the best development experience, install:
 
-When you're ready, run:
+- [Android Studio](https://developer.android.com/studio) for Android development
+- [Xcode](https://developer.apple.com/xcode/) (Mac only) for iOS development
 
-```bash
-npm run reset-project
+### Environment Setup
+
+Create a `.env` file in the root directory with your credentials:
+
+```env
+INSTANT_APP_ID=your-instant-app-id
+INSTANT_ADMIN_TOKEN=your-admin-token
+INSTANT_ORG_ID=your-org-id
+OPENAI_API_KEY=your-openai-api-key
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Installation
 
-## Learn more
+1. **Clone the repository**
 
-To learn more about developing your project with Expo, look at the following resources:
+   ```bash
+   git clone <repository-url>
+   cd instant-mini
+   ```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+2. **Install dependencies**
 
-## Join the community
+   ```bash
+   bun install
+   # or npm install
+   ```
 
-Join our community of developers creating universal apps.
+3. **Prebuild the native code**
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+   ```bash
+   bunx expo prebuild
+   ```
+
+4. **Run the app**
+
+   ```bash
+   # iOS
+   bunx expo run:ios
+
+   # Android
+   bunx expo run:android
+   ```
+
+## 🚀 Learn More
+
+**Take a shortcut from web developer to mobile development fluency with guided learning**
+
+Enjoyed this project? Learn to use React Native to build production-ready, native mobile apps for both iOS and Android based on your existing web development skills.
+
+<a href="https://galaxies.dev?utm_source=simongrimm&utm_medium=github&vid=pocket-clone"><img src="banner.png" height="auto" width="100%"></a>
