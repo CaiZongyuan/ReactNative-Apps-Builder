@@ -1,6 +1,6 @@
 # Build your own App Builder with React Native and InstantDB
 
-An AI-powered app builder that generates React Native applications using natural language prompts. Built with React Native, Expo, InstantDB, and OpenAI, showcasing modern mobile development practices.
+An AI-powered app builder that generates React Native applications using natural language prompts. Built with React Native, Expo, [InstantDB](https://dub.sh/instantdb), and OpenAI, showcasing modern mobile development practices.
 
 ## Features
 
@@ -28,7 +28,7 @@ Watch and build this App Builder step by step:
 
 - [Bun](https://bun.sh/) (recommended) or Node.js
 - [Expo CLI](https://docs.expo.dev/get-started/set-up-your-environment/)
-- InstantDB account and app credentials
+- [InstantDB](https://dub.sh/instantdb) account and app credentials
 - OpenAI API key
 
 For the best development experience, install:
