@@ -11,8 +11,9 @@
     "lint": "expo lint"
   },
   "dependencies": {
-    "@ai-sdk/openai": "^2.0.62",
-    "@ai-sdk/react": "^2.0.87",
+    "@ai-sdk/openai": "^2.0.68",
+    "@ai-sdk/openai-compatible": "^1.0.28",
+    "@ai-sdk/react": "^2.0.93",
     "@babel/standalone": "^7.28.5",
     "@expo/vector-icons": "^15.0.3",
     "@instantdb/admin": "^0.22.45",
@@ -25,7 +26,7 @@
     "@react-navigation/native": "^7.1.8",
     "@stardazed/streams-text-encoding": "^1.0.2",
     "@ungap/structured-clone": "^1.3.0",
-    "ai": "^5.0.87",
+    "ai": "^5.0.93",
     "expo": "~54.0.22",
     "expo-constants": "~18.0.10",
     "expo-dev-client": "~6.0.17",

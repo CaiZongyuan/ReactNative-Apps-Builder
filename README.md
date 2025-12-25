@@ -26,7 +26,7 @@ This project was built following the excellent tutorial by Simon Grimm:
 
 - [Bun](https://bun.sh/) (recommended) or Node.js
 - [Expo CLI](https://docs.expo.dev/get-started/set-up-your-environment/)
-- [InstantDB](https://dub.sh/instantdb) account and app credentials
+- [InstantDB](https://dub.sh/instantdb) account
 - OpenAI API key
 
 For the best development experience, install:
@@ -34,16 +34,44 @@ For the best development experience, install:
 - [Android Studio](https://developer.android.com/studio) for Android development
 - [Xcode](https://developer.apple.com/xcode/) (Mac only) for iOS development
 
-### Environment Setup
+### InstantDB Setup
 
-Create a `.env` file in the root directory with your credentials:
+1. **Create an Organization**: First, create an organization in your [InstantDB dashboard](https://instantdb.com/)
+
+2. **Get Your Credentials**:
+
+   - **Platform Personal Access Token**: Click on your user avatar in the top-left corner → **User Settings** → Create a new personal access token
+
+   - **Organization Credentials**: Go to your newly created organization to find:
+     - `EXPO_PUBLIC_INSTANT_APP_ID` - Your app's ID
+     - `INSTANT_APP_ADMIN_TOKEN` - Admin token for server-side operations
+     - `INSTANT_ORG_ID` - Your organization ID
+
+   - **AI API Key**: Get your GLM API key from the provider
+
+3. **Configure Environment Variables**: Create a `.env` file in the root directory:
 
 ```env
-INSTANT_APP_ID=your-instant-app-id
-INSTANT_ADMIN_TOKEN=your-admin-token
+EXPO_PUBLIC_INSTANT_APP_ID=your-instant-app-id
+INSTANT_APP_ADMIN_TOKEN=your-admin-token
 INSTANT_ORG_ID=your-org-id
-OPENAI_API_KEY=your-openai-api-key
+INSTANT_PLATFORM_PERSONAL_ACCESS_TOKEN=your-platform-token
+GLM_API_KEY=your-glm-api-key
 ```
+
+4. **Authenticate with InstantDB CLI**:
+
+   ```bash
+   bunx instant-cli login
+   ```
+
+5. **Push Schema to Cloud**: Initialize and push your schema to InstantDB:
+
+   ```bash
+   bunx instant-cli init
+   ```
+
+   This will push your `instant.schema.ts` and other project settings to the cloud.
 
 ### Installation
 
